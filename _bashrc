@@ -11,6 +11,12 @@ alias cp="rsync -ah --progress"
 alias cp2="rsync -ah --info=progress2"
 alias wgets='wget --no-check-certificate -e robots=off -r -np -nc -c --reject "index.html*" --restrict-file-names=nocontrol'
 
+# show public, private ip
+function ips() {
+    dig +short myip.opendns.com @resolver1.opendns.com
+    ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'
+}
+
 # ffmpeg
 function vget() {
     ffmpeg -i "$1" -c copy "$2"
