@@ -3,6 +3,10 @@
 # fi
 
 alias sudo='sudo '
+
+alias ll='ls -la'
+alias lll='ls -tr'
+
 alias cp="rsync -ah --progress"
 alias cp2="rsync -ah --info=progress2"
 alias wgets='wget --no-check-certificate -e robots=off -r -np -nc -c --reject "index.html*" --restrict-file-names=nocontrol'
