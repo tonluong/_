@@ -1,0 +1,21 @@
+# if [ -f ~/_/_bashrc ]; then
+#     . ~/_/_bashrc
+# fi
+
+alias sudo='sudo '
+alias cp="rsync -ah --progress"
+alias cp2="rsync -ah --info=progress2"
+alias wgets='wget --no-check-certificate -e robots=off -r -np -nc -c --reject "index.html*" --restrict-file-names=nocontrol'
+
+# ffmpeg
+function vget() {
+    ffmpeg -i "$1" -c copy "$2"
+}
+
+# crypt
+function aes_crypt() {
+    echo $1 | openssl enc -base64 -e -aes-256-cbc -nosalt -A 
+}
+function aes_decrypt() {
+    echo $1 | openssl enc -base64 -d -aes-256-cbc -nosalt -A
+}
