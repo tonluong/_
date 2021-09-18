@@ -1,6 +1,4 @@
-# if [ -f ~/_/_bashrc ]; then
-#     . ~/_/_bashrc
-# fi
+# if [ -f ~/_/_bashrc ]; then . ~/_/_bashrc; fi
 
 alias sudo='sudo '
 
