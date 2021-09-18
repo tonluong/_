@@ -22,8 +22,8 @@ function vget() {
 
 # crypt
 function aes_crypt() {
-    echo $1 | openssl enc -base64 -e -aes-256-cbc -nosalt -A 
+    echo "$1" | openssl enc -base64 -e -aes-256-cbc -nosalt -A 
 }
 function aes_decrypt() {
-    echo $1 | openssl enc -base64 -d -aes-256-cbc -nosalt -A
+    echo "$1" | openssl enc -base64 -d -aes-256-cbc -nosalt -A
 }
