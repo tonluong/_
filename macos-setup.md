@@ -24,12 +24,13 @@ curl https://rclone.org/install.sh | sudo bash
 ```bash
 # terminal apps
 brew install \
+coreutils pv pigz \
 mpv ffmpeg \
 oath-toolkit gawk \
-wget youtube-dl annie \
-pv sf-pwgen pigz lbzip2 jq rsync \
-macfuse \
+wget rsync youtube-dl annie \
+sf-pwgen lbzip2 jq \
 par2 qrencode scrub \
+macfuse \
 restic
 
 # programming language
