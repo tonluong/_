@@ -5,6 +5,7 @@
 ```bash
 function _system() {
 
+    export HISTCONTROL="ignorespace${HISTCONTROL:+:$HISTCONTROL}"
     export HISTFILE=/dev/null
 
     export LANG=en_US.UTF-8
@@ -37,6 +38,26 @@ function _system() {
 }
 ```
 
+## System macOS
+
+```bash
+function _system_darwin() {
+    alias ll='gls -lh --color --group-directories-first'
+    alias lla='gls -lah --color --group-directories-first'
+
+    alias du='gdu --max-depth=1 -h'
+
+    alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+    alias l=lock
+
+    alias brewall='brew update; brew upgrade; brew cleanup; brew doctor'
+    alias openok="sudo xattr -rd com.apple.quarantine"
+    alias cleanfat="rm -rf ._* .fseventsd/ .Spotlight-V100/"
+
+
+}
+```
+
 ## Starship Prompt
 
 ```bash
@@ -52,6 +73,15 @@ function _prompt() {
 function ips() {
     dig +short myip.opendns.com @resolver1.opendns.com
     ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'
+}
+
+function socat1999() {
+
+    # Ubuntu
+    [[ "$(uname)" == "Linux" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/lib/sftp-server
+
+    # macOS, TODO: Clear Linux
+    [[ "$(uname)" == "Darwin" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/libexec/sftp-server
 }
 ```
 
@@ -77,6 +107,8 @@ function _git() {
 _system
 _prompt
 _git
+
+[[ "$(uname)" == "Darwin" ]] && _system_darwin
 ```
 
 
