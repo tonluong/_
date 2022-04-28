@@ -70,18 +70,8 @@ function _prompt() {
 ## Network
 
 ```bash
-function ips() {
-    dig +short myip.opendns.com @resolver1.opendns.com
-    ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'
-}
-
-function socat1999() {
-
-    # Ubuntu
-    [[ "$(uname)" == "Linux" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/lib/sftp-server
-
-    # macOS, TODO: Clear Linux
-    [[ "$(uname)" == "Darwin" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/libexec/sftp-server
+function _network {
+    alias wgets='wget --no-check-certificate -e robots=off -r -np -nc -c --reject "index.html*" --restrict-file-names=nocontrol'
 }
 ```
 
@@ -100,6 +90,35 @@ function _git() {
     git config --global alias.gl 'config --global -l'
 }
 ```
+
+## Misc
+
+```bash
+function ips() {
+    dig +short myip.opendns.com @resolver1.opendns.com
+    ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'
+}
+
+function socat1999() {
+
+    # Ubuntu
+    [[ "$(uname)" == "Linux" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/lib/sftp-server
+
+    # macOS, TODO: Clear Linux
+    [[ "$(uname)" == "Darwin" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/libexec/sftp-server
+}
+
+function aes_encrypt() { echo "$1" | openssl enc -base64 -e -aes-256-cbc -nosalt -A }
+function aes_decrypt() { echo "$1" | openssl enc -base64 -d -aes-256-cbc -nosalt -A }
+function tarpigz() { tar cf - "$1" | pv | pigz > "$2" }
+function tarxz() { tar cf - "$1" | pv | xz -T 0 -z - > "$2" }
+function vget() { ffmpeg -i "$1" -c copy "$2" }
+function ytget() { youtube-dl --write-info-json -o '%(id)s/%(title)s.%(ext)s' "$1" }
+function ytgetmp3() { youtube-dl -k -x --audio-format mp3 --audio-quality 0 -o '%(id)s/%(title)s.%(ext)s' "$1" }
+
+function xfile() { cat "$2" | while read line || [[ -n $line ]]; do "$1" "$line"; done }
+```
+
 
 ## load
 
