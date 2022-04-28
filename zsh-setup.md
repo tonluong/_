@@ -4,7 +4,7 @@
 
 ```bash
 function _system() {
-    export HISTCONTROL="ignorespace${HISTCONTROL:+:$HISTCONTROL}"
+
     export HISTFILE=/dev/null
 
     export LANG=en_US.UTF-8
