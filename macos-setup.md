@@ -29,7 +29,7 @@ oath-toolkit gawk \
 wget youtube-dl annie \
 pv sf-pwgen pigz lbzip2 jq rsync \
 macfuse \
-par2 qrencode \
+par2 qrencode scrub \
 restic
 
 # programming language
