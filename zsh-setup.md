@@ -124,6 +124,7 @@ function xfile() { cat "$2" | while read line || [[ -n $line ]]; do "$1" "$line"
 
 ```bash
 _system
+_network
 _prompt
 _git
 
