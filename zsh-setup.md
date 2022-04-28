@@ -119,6 +119,57 @@ function ytgetmp3() { youtube-dl -k -x --audio-format mp3 --audio-quality 0 -o '
 function xfile() { cat "$2" | while read line || [[ -n $line ]]; do "$1" "$line"; done }
 ```
 
+## Misc macOS
+
+```bash
+function _make_ramdisk_hfs() {
+
+    # defaults
+    _ramdisk_name="ram"
+    _ramdisk_size=1024
+
+    _is_int='^[0-9]+$'
+    _is_alpha_int='^[a-zA-Z0-9]+$'
+
+    while [ "$#" -gt 0 ] ; do
+        if [ "$1" != "" ] &&  [[ $1 =~ $_is_int ]] ; then
+            _ramdisk_size=$1
+        elif [ "$1" != "" ] && [[ $1 =~ $_is_alpha_int ]]; then
+            _ramdisk_name=$1
+        fi
+        shift
+    done
+
+    # Ramdisk Settings
+    _ramdisk_size_sectors=$((${_ramdisk_size}*1024*1024/512))
+    _ramdisk_device=`hdid -nomount ram://${_ramdisk_size_sectors}`
+    newfs_hfs -v ${_ramdisk_name} ${_ramdisk_device}
+    diskutil mount ${_ramdisk_device}
+}
+
+
+function _make_ramdisk_apfs() {
+
+    # defaults
+    _ramdisk_name="ram"
+    _ramdisk_size=1024
+
+    _is_int='^[0-9]+$'
+    _is_alpha_int='^[a-zA-Z0-9]+$'
+
+    while [ "$#" -gt 0 ] ; do
+        if [ "$1" != "" ] &&  [[ $1 =~ $_is_int ]] ; then
+            _ramdisk_size=$1
+        elif [ "$1" != "" ] && [[ $1 =~ $_is_alpha_int ]]; then
+            _ramdisk_name=$1
+        fi
+        shift
+    done
+
+    _ramdisk_size_sectors=$((${_ramdisk_size}*1024*1024/512))
+    diskutil partitionDisk $(hdiutil attach -nomount ram://${_ramdisk_size_sectors}) 1 GPTFormat APFS ${_ramdisk_name} '100%'
+}
+```
 
 ## load
 
