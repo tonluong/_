@@ -1,12 +1,10 @@
 
-# macos setup
+# macOS Setup
 
-# starship install
+## Starship install
 
 ```bash
-
 curl -sS https://starship.rs/install.sh | sh
-
 ```
 
 ## Homebrew Install
