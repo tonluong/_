@@ -101,11 +101,13 @@ function ips() {
 
 function socat1999() {
 
-    # Ubuntu
-    [[ "$(uname)" == "Linux" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/lib/sftp-server
+    if [[ -f "/usr/lib/sftp-server" ]] {
+         socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/lib/sftp-server
+    } 
+    if [[ -f "/usr/libexec/sftp-server" ]] {
+         socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/libexec/sftp-server
+    } 
 
-    # macOS, TODO: Clear Linux
-    [[ "$(uname)" == "Darwin" ]] && socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/libexec/sftp-server
 }
 
 function aes_encrypt() { echo "$1" | openssl enc -base64 -e -aes-256-cbc -nosalt -A }

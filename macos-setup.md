@@ -28,7 +28,7 @@ coreutils htop pv pigz \
 rhash par2 \
 mpv ffmpeg \
 oath-toolkit gawk \
-wget rsync youtube-dl annie \
+wget socat rsync youtube-dl annie \
 sf-pwgen lbzip2 jq \
 qrencode scrub \
 macfuse \
