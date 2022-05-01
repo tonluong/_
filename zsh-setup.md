@@ -62,8 +62,13 @@ function _system_darwin() {
 
 ```bash
 function _prompt() {
-    alias ssr="source ${HOME}/.zshrc"
-    eval "$(starship init zsh)"
+    if [[ -f /usr/local/bin/starship ]] 
+    then
+        alias ssr="source ${HOME}/.zshrc"
+        eval "$(starship init zsh)"
+    else 
+        curl -sS https://starship.rs/install.sh | sh
+    fi
 }
 ```
 
@@ -100,14 +105,14 @@ function ips() {
 }
 
 function socat1999() {
-
-    if [[ -f "/usr/lib/sftp-server" ]] {
+    if [[ -f "/usr/lib/sftp-server" ]] 
+    then
          socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/lib/sftp-server
-    } 
-    if [[ -f "/usr/libexec/sftp-server" ]] {
+    fi
+    if [[ -f "/usr/libexec/sftp-server" ]] 
+    then
          socat TCP4-LISTEN:1999,bind=$1,fork EXEC:/usr/libexec/sftp-server
-    } 
-
+    fi
 }
 
 function aes_encrypt() { echo "$1" | openssl enc -base64 -e -aes-256-cbc -nosalt -A }
